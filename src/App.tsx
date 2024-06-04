@@ -1,5 +1,5 @@
 import { Header } from '@components/Header';
-import { Profile } from '@components/profile';
+import { ProfileCard } from '@components/ProfileCard';
 import { faker } from '@faker-js/faker';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Header />;
-      <Profile avatarUrl={avatarUrl} name={name} profession={profession} />
+      <ProfileCard avatarUrl={avatarUrl} name={name} profession={profession} />
     </>
   );
 }

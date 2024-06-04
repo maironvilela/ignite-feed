@@ -1,27 +1,35 @@
 import styles from './styles.module.css';
-import { faker } from '@faker-js/faker';
-import { PencilSimpleLine } from '@phosphor-icons/react';
 
-type ProfileProps = {
+export type ProfileProps = {
   name: string;
   profession: string;
   avatarUrl: string;
+  isVerticalView?: boolean;
 };
-export function Profile({ name, profession, avatarUrl }: ProfileProps) {
+
+export function Profile({
+  name,
+  profession,
+  avatarUrl,
+  isVerticalView = true
+}: ProfileProps) {
   return (
-    <div className={styles.container}>
-      <header className={styles.header}></header>
-      <img className={styles.avatar} src={avatarUrl} />
-
-      <section className={styles.profile_information}>
+    <div
+      className={[
+        styles.container,
+        isVerticalView ? styles.verticalView : styles.horizontalView
+      ].join(' ')}
+    >
+      <img src={avatarUrl} className={styles.avatar} />
+      <section
+        className={[
+          styles.profile_information,
+          isVerticalView ? '' : styles.profile_information_horizontal_view
+        ].join(' ')}
+      >
         <strong>{name}</strong>
-        <span>UI {profession}</span>
+        <span>{profession}</span>
       </section>
-
-      <button className={styles.btn_profile_edit}>
-        <PencilSimpleLine />
-        Editar Perfil
-      </button>
     </div>
   );
 }
