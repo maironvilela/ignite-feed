@@ -12,7 +12,6 @@ type PostProps = {
 };
 
 export function Post({ name, role, avatarUrl, publishedAt }: PostProps) {
-  const id = 1;
   const contents = [
     { type: 'paragraph', content: faker.lorem.paragraph({ min: 2, max: 6 }) },
     { type: 'paragraph', content: faker.lorem.paragraph({ min: 4, max: 11 }) },
