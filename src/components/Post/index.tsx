@@ -2,22 +2,27 @@ import { Profile } from '@components/Profile';
 import styles from './styles.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { faker } from '@faker-js/faker';
+
+export type Content = {
+  type: 'paragraph' | 'link';
+  content: string;
+};
 
 type PostProps = {
   publishedAt: Date;
   name: string;
   role: string;
   avatarUrl: string;
+  contents: Content[];
 };
 
-export function Post({ name, role, avatarUrl, publishedAt }: PostProps) {
-  const contents = [
-    { type: 'paragraph', content: faker.lorem.paragraph({ min: 2, max: 6 }) },
-    { type: 'paragraph', content: faker.lorem.paragraph({ min: 4, max: 11 }) },
-    { type: 'link', content: faker.internet.email() },
-    { type: 'link', content: faker.internet.domainName() }
-  ];
+export function Post({
+  name,
+  role,
+  avatarUrl,
+  publishedAt,
+  contents
+}: PostProps) {
   const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
     locale: ptBR,
     addSuffix: true
