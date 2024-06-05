@@ -30,7 +30,7 @@ export function PostComment({
   );
 
   return (
-    <div>
+    <div className={styles.container}>
       <header>
         <Avatar avatarUrl={avatarUrl} isBorder={false} />
         <div className={styles.comment}>

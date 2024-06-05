@@ -8,6 +8,7 @@
   --black: #28262e;
   --white: #ffffff;
   --white-100: #e1e1e6;
+  --gray-100: #7c7c8a;
   --gray-200: #8d8d99;
   --gray-300: #c4c4cc;
   --gray-400: #7c7c8a;
@@ -25,6 +26,11 @@
   --lg-h2: 2.2rem;
 
   --lg-fs: 1.8rem;
+}
+
+:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--green-500);
 }
 
 html {

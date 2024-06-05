@@ -2,6 +2,15 @@ import { Profile } from '@components/Profile';
 import styles from './styles.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { PostComment } from '@components/PostComment';
+
+type Comments = {
+  id: string;
+  avatarUrl: string;
+  comment: string;
+  author: string;
+  publishedAt: Date;
+};
 
 export type Content = {
   type: 'paragraph' | 'link';
@@ -14,6 +23,7 @@ type PostProps = {
   role: string;
   avatarUrl: string;
   contents: Content[];
+  comments: Comments[];
 };
 
 export function Post({
@@ -21,12 +31,9 @@ export function Post({
   role,
   avatarUrl,
   publishedAt,
-  contents
+  contents,
+  comments
 }: PostProps) {
-  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
-    locale: ptBR,
-    addSuffix: true
-  });
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'às' HH:mm'h'",
@@ -34,6 +41,11 @@ export function Post({
       locale: ptBR
     }
   );
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true
+  });
   const isVerticalView = false;
   return (
     <div className={styles.container}>
@@ -68,11 +80,25 @@ export function Post({
         <form>
           <strong>Deixe seu feedback</strong>
           <textarea placeholder="Escreva um comentário" />
-          <button>Publicar</button>
+          <footer>
+            <button>Publicar</button>
+          </footer>
         </form>
-
-        <section className={styles.comments}></section>
       </main>
+
+      <section>
+        {comments.map((comment) => {
+          return (
+            <PostComment
+              key={comment.id}
+              publishedAt={comment.publishedAt}
+              author={comment.author}
+              avatarUrl={comment.avatarUrl}
+              comment={comment.comment}
+            />
+          );
+        })}
+      </section>
     </div>
   );
 }

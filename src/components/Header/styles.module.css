@@ -1,19 +1,16 @@
- 
-.header{
-    height: 10rem;
-    width: 100vw;
-    background-color: var(--gray-600);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1,6rem;
-
-    h1{
-        color: var(--blue-300);
-         font-weight: bold;
-        color: var(--white-100);
-    }
+.header {
+  height: 10rem;
+  width: 100vw;
+  background-color: var(--gray-600);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1, 6rem;
 }
-   
- 
+
+.header h1 {
+  color: var(--blue-300);
+  font-weight: bold;
+  color: var(--white-100);
+}
