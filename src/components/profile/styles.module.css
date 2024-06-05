@@ -11,6 +11,7 @@
 
 .horizontalView {
   flex-direction: row;
+  justify-content: start;
 }
 
 .avatar {
@@ -41,5 +42,5 @@
 
 .profile_information_horizontal_view {
   align-items: start;
-  margin-left: 0.8rem;
+  margin-left: rem;
 }

@@ -1,15 +1,20 @@
 import { Header } from '@components/Header';
-import { ProfileCard } from '@components/ProfileCard';
+import { Post } from '@components/Post';
 import { faker } from '@faker-js/faker';
 
 function App() {
   const avatarUrl = faker.image.avatar();
   const name = faker.name.fullName();
-  const profession = faker.commerce.department();
+  const role = faker.commerce.department();
   return (
     <>
       <Header />;
-      <ProfileCard avatarUrl={avatarUrl} name={name} profession={profession} />
+      <Post
+        name={name}
+        role={role}
+        avatarUrl={avatarUrl}
+        publishedAt={new Date()}
+      />
     </>
   );
 }
