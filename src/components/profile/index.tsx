@@ -1,3 +1,4 @@
+import { Avatar } from '@components/Avatar';
 import styles from './styles.module.css';
 
 export type ProfileProps = {
@@ -20,7 +21,7 @@ export function Profile({
         isVerticalView ? styles.verticalView : styles.horizontalView
       ].join(' ')}
     >
-      <img src={avatarUrl} className={styles.avatar} />
+      <Avatar avatarUrl={avatarUrl} isBorder={true} />
       <section
         className={[
           styles.profile_information,

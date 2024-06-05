@@ -1,0 +1,10 @@
+.avatar {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 8px;
+}
+
+.with_border {
+  border: solid 4px var(--gray-600);
+  outline: solid 3px var(--green-300);
+}

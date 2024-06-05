@@ -1,0 +1,68 @@
+header {
+  display: flex;
+  flex-direction: row;
+  gap: 1.6rem;
+  padding: 1rem;
+}
+
+header div.comment {
+  background-color: var(--black);
+  padding: 1.6rem;
+}
+
+header div.comment p {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: var(--white-100);
+  line-height: 160%;
+}
+
+header div.author_information strong {
+  font-weight: bold;
+  color: var(--white-100);
+  display: block;
+}
+
+header div.author_information time {
+  font-size: 1.2rem;
+  color: var(--gray-200);
+}
+
+header div.author_information button {
+  float: right;
+  border: none;
+  background: transparent;
+  color: var(--gray-200);
+  transition: color 1s;
+  margin-top: -2rem;
+}
+
+header div.author_information button:hover {
+  color: var(--red);
+}
+
+footer {
+  margin-left: 11rem;
+}
+
+footer button svg {
+  margin-right: 0.5rem;
+}
+
+footer button {
+  background: transparent;
+  border: none;
+  color: var(--gray-200);
+  display: flex;
+  align-items: center;
+  transition: color 1s;
+}
+
+footer button span::before {
+  content: '\2022';
+  padding: 0.5rem;
+}
+
+footer button:hover {
+  color: var(--green-300);
+}

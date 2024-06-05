@@ -14,14 +14,6 @@
   justify-content: start;
 }
 
-.avatar {
-  width: 8rem;
-  height: 8rem;
-  border-radius: 8px;
-  border: solid 4px var(--gray-600);
-  outline: solid 3px var(--green-300);
-}
-
 .profile_information {
   display: flex;
   flex-direction: column;
