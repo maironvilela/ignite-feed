@@ -3,6 +3,7 @@ import { Content, Post } from '@components/Post';
 import { ProfileCard } from '@components/ProfileCard';
 import { faker } from '@faker-js/faker';
 import styles from './app.module.css';
+import { useEffect } from 'react';
 
 function App() {
   const contents: Content[] = [
@@ -35,6 +36,15 @@ function App() {
       publishedAt: faker.date.recent()
     }
   ];
+
+  const fetchData = () => {
+    console.log('Carregando informações');
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.container}>
       <Header />
