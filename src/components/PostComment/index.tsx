@@ -3,6 +3,8 @@ import styles from './styles.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { ThumbsUp, Trash } from 'phosphor-react';
+import { useState } from 'react';
+import Dialog from '@components/Dialog';
 
 type PostComment = {
   avatarUrl: string;
@@ -21,6 +23,8 @@ export function PostComment({
     addSuffix: true
   });
 
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'às' HH:mm'h'",
@@ -31,6 +35,7 @@ export function PostComment({
 
   return (
     <div className={styles.container}>
+      <Dialog isOpen={isOpenModal} setOpenModal={setIsOpenModal} />
       <header>
         <Avatar avatarUrl={avatarUrl} isBorder={false} />
         <div className={styles.comment}>
@@ -42,7 +47,7 @@ export function PostComment({
             >
               {publishedDateRelativeToNow}
             </time>
-            <button>
+            <button onClick={() => setIsOpenModal(!isOpenModal)}>
               <Trash />
             </button>
           </div>

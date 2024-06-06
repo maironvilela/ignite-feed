@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.6rem;
 }
 
 .verticalView {
@@ -35,5 +35,4 @@
 
 .profile_information_horizontal_view {
   align-items: start;
-  margin-left: rem;
 }
