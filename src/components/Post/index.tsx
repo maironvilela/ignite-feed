@@ -19,7 +19,7 @@ export type Content = {
   content: string;
 };
 
-type PostProps = {
+export type PostProps = {
   publishedAt: Date;
   name: string;
   role: string;

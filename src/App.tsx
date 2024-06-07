@@ -1,40 +1,18 @@
 import { Header } from '@components/Header';
-import { Post } from '@components/Post';
+import { Post, PostProps } from '@components/Post';
 import { ProfileCard } from '@components/ProfileCard';
-import { faker } from '@faker-js/faker';
 import styles from './app.module.css';
 import { useEffect, useState } from 'react';
 import { api } from './services/api';
 
-export type Comments = {
-  id: string;
-  avatarUrl: string;
-  comment: string;
-  author: string;
-  publishedAt: Date;
-};
-
-export type Content = {
-  id: string;
-  type: 'paragraph' | 'link';
-  content: string;
-};
-
-type Post = {
-  id: string;
-  publishedAt: Date;
-  name: string;
-  role: string;
-  avatarUrl: string;
-  contents: Content[];
-  comments: Comments[];
-};
+type Post = PostProps;
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const avatarUrl = faker.image.avatar();
-  const name = faker.name.fullName();
-  const role = faker.commerce.department();
+  const avatarUrl =
+    'https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400';
+  const name = 'Maria da Silva';
+  const role = 'Departamento Pessoal';
 
   const fetchData = async () => {
     const response = await api.get('http://localhost:3000/posts', {
@@ -67,7 +45,7 @@ function App() {
                 publishedAt={new Date(post.publishedAt)}
                 name={role}
                 role={post.role}
-                avatarUrl={avatarUrl}
+                avatarUrl={post.avatarUrl}
                 contents={post.contents}
                 comments={post.comments}
               />
