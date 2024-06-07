@@ -20,6 +20,7 @@ export type Content = {
 };
 
 export type PostProps = {
+  id?: string;
   publishedAt: Date;
   name: string;
   role: string;

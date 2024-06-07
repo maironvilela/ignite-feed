@@ -9,10 +9,13 @@ type Post = PostProps;
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const avatarUrl =
-    'https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400';
-  const name = 'Maria da Silva';
-  const role = 'Departamento Pessoal';
+
+  const user = {
+    avatarUrl:
+      'https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400',
+    name: 'Maria da Silva',
+    role: 'Departamento Pessoal'
+  };
 
   const fetchData = async () => {
     const response = await api.get('http://localhost:3000/posts', {
@@ -33,25 +36,32 @@ function App() {
     <div className={styles.container}>
       <Header />
       <div className={styles.profileCard}>
-        <ProfileCard name={name} avatarUrl={avatarUrl} profession={role} />
+        <ProfileCard
+          name={user.name}
+          avatarUrl={user.avatarUrl}
+          profession={user.role}
+        />
 
-        {posts.length === 0 ? (
-          <h1>Carregando</h1>
-        ) : (
-          posts.map((post) => {
-            return (
-              <Post
-                key={post.id}
-                publishedAt={new Date(post.publishedAt)}
-                name={role}
-                role={post.role}
-                avatarUrl={post.avatarUrl}
-                contents={post.contents}
-                comments={post.comments}
-              />
-            );
-          })
-        )}
+        <div className={styles.post}>
+          {posts.length === 0 ? (
+            //TODO: Adicionar um loader
+            <h1>Carregando...</h1>
+          ) : (
+            posts.map((post) => {
+              return (
+                <Post
+                  key={post.id}
+                  publishedAt={new Date(post.publishedAt)}
+                  name={post.role}
+                  role={post.role}
+                  avatarUrl={post.avatarUrl}
+                  contents={post.contents}
+                  comments={post.comments}
+                />
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );
