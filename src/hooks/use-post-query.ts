@@ -22,7 +22,9 @@ const fetchData = async (): AxiosPromise<PostData[]> => {
 export function usePostQuery() {
   const query = useQuery({
     queryFn: fetchData,
-    queryKey: ['fetch-post-data']
+    queryKey: ['fetch-post-data'],
+    retry: false,
+    refetchInterval: 60 * 5 * 1000
   });
 
   const data = query.data?.data;

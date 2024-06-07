@@ -3,9 +3,10 @@ import styles from './styles.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { ThumbsUp, Trash } from 'phosphor-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dialog from '@components/Dialog';
 import { getDateUtcFormat } from '@utils/date-utc-format';
+import { usePostCommentMutation } from '@hooks/use-post-comment-mutation';
 
 type PostComment = {
   avatarUrl: string;
@@ -19,6 +20,20 @@ export function PostComment({
   author,
   comment
 }: PostComment) {
+  const { mutate, isSuccess } = usePostCommentMutation();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleSubmit = (data: PostComment) => {
+    mutate(data);
+  };
+  const handleClose = () => {
+    console.log('Fechando modal');
+  };
+
+  useEffect(() => {
+    handleClose;
+  }, [isSuccess]);
+
   const dataHoraUtc = getDateUtcFormat(publishedAt);
 
   const publishedDateRelativeToNow = formatDistanceToNow(dataHoraUtc, {
