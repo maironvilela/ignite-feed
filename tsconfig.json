@@ -8,7 +8,8 @@
 
     "baseUrl": "./src", // This is to avoid adding the ./src prefix to each path below.
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"]
     },
 
     /* Bundler mode */

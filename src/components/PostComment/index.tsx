@@ -5,6 +5,7 @@ import { ptBR } from 'date-fns/locale';
 import { ThumbsUp, Trash } from 'phosphor-react';
 import { useState } from 'react';
 import Dialog from '@components/Dialog';
+import { getDateUtcFormat } from '@utils/date-utc-format';
 
 type PostComment = {
   avatarUrl: string;
@@ -18,7 +19,9 @@ export function PostComment({
   author,
   comment
 }: PostComment) {
-  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+  const dataHoraUtc = getDateUtcFormat(publishedAt);
+
+  const publishedDateRelativeToNow = formatDistanceToNow(dataHoraUtc, {
     locale: ptBR,
     addSuffix: true
   });
@@ -26,7 +29,7 @@ export function PostComment({
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const publishedDateFormatted = format(
-    publishedAt,
+    dataHoraUtc,
     "d 'de' LLLL 'às' HH:mm'h'",
     {
       locale: ptBR
@@ -42,7 +45,7 @@ export function PostComment({
           <div className={styles.author_information}>
             <strong>{author}</strong>
             <time
-              dateTime={publishedAt.toISOString()}
+              dateTime={new Date(publishedAt).toISOString()}
               title={publishedDateFormatted}
             >
               {publishedDateRelativeToNow}

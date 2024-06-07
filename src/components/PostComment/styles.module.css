@@ -16,10 +16,10 @@ header div.comment {
 }
 
 header div.comment p {
-  margin-top: 1rem;
   font-size: 1.4rem;
   color: var(--white-100);
   line-height: 1.6rem;
+  padding-top: 2.4rem;
 }
 
 header div.author_information strong {

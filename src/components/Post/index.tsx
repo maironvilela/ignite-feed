@@ -3,8 +3,9 @@ import styles from './styles.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { PostComment } from '@components/PostComment';
+import { getDateUtcFormat } from '@utils/date-utc-format';
 
-type Comments = {
+export type Comments = {
   id: string;
   avatarUrl: string;
   comment: string;
@@ -13,6 +14,7 @@ type Comments = {
 };
 
 export type Content = {
+  id: string;
   type: 'paragraph' | 'link';
   content: string;
 };
@@ -34,15 +36,17 @@ export function Post({
   contents,
   comments
 }: PostProps) {
+  const dataHoraUtc = getDateUtcFormat(publishedAt);
+
   const publishedDateFormatted = format(
-    publishedAt,
-    "d 'de' LLLL 'às' HH:mm'h'",
+    dataHoraUtc,
+    "dd 'de' LLLL 'às' HH:mm'h'",
     {
       locale: ptBR
     }
   );
 
-  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+  const publishedDateRelativeToNow = formatDistanceToNow(dataHoraUtc, {
     locale: ptBR,
     addSuffix: true
   });
@@ -59,7 +63,7 @@ export function Post({
 
         <time
           title={publishedDateFormatted}
-          dateTime={publishedAt.toISOString()}
+          dateTime={new Date(publishedAt).toISOString()}
         >
           {publishedDateRelativeToNow}
         </time>
@@ -67,15 +71,24 @@ export function Post({
 
       <main>
         <section className={styles.content}>
-          {contents.map((content) => {
-            if (content.type == 'paragraph') {
-              return <p>{content.content}</p>;
-            }
+          {!contents ? (
+            <h1>Nenhum Post Encontrado</h1>
+          ) : (
+            contents.map((c) => {
+              if (c.type == 'paragraph') {
+                return <p key={c.id}>{c.content}</p>;
+              }
 
-            if (content.type == 'link') {
-              return <a href="#"> {content.content}</a>;
-            }
-          })}
+              if (c.type == 'link') {
+                return (
+                  <a key={c.id} href="#">
+                    {' '}
+                    {c.content}
+                  </a>
+                );
+              }
+            })
+          )}
         </section>
         <form>
           <strong>Deixe seu feedback</strong>
@@ -91,7 +104,7 @@ export function Post({
           return (
             <PostComment
               key={comment.id}
-              publishedAt={comment.publishedAt}
+              publishedAt={new Date(comment.publishedAt)}
               author={comment.author}
               avatarUrl={comment.avatarUrl}
               comment={comment.comment}
