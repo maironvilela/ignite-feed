@@ -23,7 +23,7 @@ export function usePostQuery() {
   const query = useQuery({
     queryFn: fetchData,
     queryKey: ['fetch-post-data'],
-    retry: false,
+    retry: true,
     refetchInterval: 60 * 5 * 1000
   });
 

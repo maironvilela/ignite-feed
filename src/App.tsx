@@ -6,6 +6,7 @@ import pageNotFound from './assets/posts-not-found.svg'; // Tell webpack this JS
 import errorServer from './assets/error-server.jpg'; // Tell webpack this JS file uses this image
 
 import { usePostQuery } from '@hooks/use-post-query';
+import { LoadingPosts } from '@components/LoaderPosts';
 
 type Post = PostProps;
 
@@ -30,7 +31,7 @@ function App() {
         />
 
         <div className={styles.post}>
-          {isLoading && <h1>Carregando...</h1>}
+          {isLoading && <LoadingPosts />}
           {isError && (
             <div>
               <img src={errorServer} alt="Logo" />
