@@ -2,13 +2,15 @@ import { Header } from '@components/Header';
 import { Post, PostProps } from '@components/Post';
 import { ProfileCard } from '@components/ProfileCard';
 import styles from './app.module.css';
-import { useEffect, useState } from 'react';
-import { api } from './services/api';
+import pageNotFound from './assets/posts-not-found.svg'; // Tell webpack this JS file uses this image
+import errorServer from './assets/error-server.jpg'; // Tell webpack this JS file uses this image
+
+import { usePostQuery } from '@hooks/use-post-query';
 
 type Post = PostProps;
 
 function App() {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const { data, isLoading, isError } = usePostQuery();
 
   const user = {
     avatarUrl:
@@ -16,21 +18,6 @@ function App() {
     name: 'Maria da Silva',
     role: 'Departamento Pessoal'
   };
-
-  const fetchData = async () => {
-    const response = await api.get('http://localhost:3000/posts', {
-      headers: {
-        Accept: 'application/json'
-      }
-    });
-    const posts = response.data;
-    setPosts(posts);
-    console.log(posts[0]);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div className={styles.container}>
@@ -43,11 +30,20 @@ function App() {
         />
 
         <div className={styles.post}>
-          {posts.length === 0 ? (
-            //TODO: Adicionar um loader
-            <h1>Carregando...</h1>
-          ) : (
-            posts.map((post) => {
+          {isLoading && <h1>Carregando...</h1>}
+          {isError && (
+            <div>
+              <img src={errorServer} alt="Logo" />
+            </div>
+          )}
+          {data?.length === 0 && (
+            <div>
+              <img src={pageNotFound} alt="Logo" />
+            </div>
+          )}
+
+          {!isLoading &&
+            data?.map((post) => {
               return (
                 <Post
                   key={post.id}
@@ -59,8 +55,7 @@ function App() {
                   comments={post.comments}
                 />
               );
-            })
-          )}
+            })}
         </div>
       </div>
     </div>

@@ -13,6 +13,14 @@ export default defineConfig({
         replacement: path.resolve(__dirname, 'src/components')
       },
       {
+        find: '@services',
+        replacement: path.resolve(__dirname, 'src/services')
+      },
+      {
+        find: '@hooks',
+        replacement: path.resolve(__dirname, 'src/hooks')
+      },
+      {
         find: '@utils',
         replacement: path.resolve(__dirname, 'src/utils')
       }
