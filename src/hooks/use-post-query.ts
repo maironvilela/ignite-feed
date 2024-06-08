@@ -1,4 +1,3 @@
-import { Comments, Content } from '@components/Post';
 import { useQuery } from '@tanstack/react-query';
 import { AxiosPromise } from 'axios';
 import { api } from '@services/api';
@@ -9,8 +8,6 @@ export interface PostData {
   role: string;
   avatarUrl: string;
   publishedAt: Date;
-  contents: Content[];
-  comments: Comments[];
 }
 
 const fetchData = async (): AxiosPromise<PostData[]> => {
@@ -22,9 +19,7 @@ const fetchData = async (): AxiosPromise<PostData[]> => {
 export function usePostQuery() {
   const query = useQuery({
     queryFn: fetchData,
-    queryKey: ['fetch-post-data'],
-    retry: true,
-    refetchInterval: 60 * 5 * 1000
+    queryKey: ['fetch-post-data']
   });
 
   const data = query.data?.data;

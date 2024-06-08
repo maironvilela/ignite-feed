@@ -2,41 +2,21 @@ import { Profile } from '@components/Profile';
 import styles from './styles.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { PostComment } from '@components/PostComment';
 import { getDateUtcFormat } from '@utils/date-utc-format';
-
-export type Comments = {
-  id: string;
-  avatarUrl: string;
-  comment: string;
-  author: string;
-  publishedAt: Date;
-};
-
-export type Content = {
-  id: string;
-  type: 'paragraph' | 'link';
-  content: string;
-};
+import { usePostContentQuery } from '@hooks/use-post-content-query';
+import { LoadingPosts } from '@components/LoaderPosts';
 
 export type PostProps = {
-  id?: string;
+  id: string;
   publishedAt: Date;
   name: string;
   role: string;
   avatarUrl: string;
-  contents: Content[];
-  comments: Comments[];
 };
 
-export function Post({
-  name,
-  role,
-  avatarUrl,
-  publishedAt,
-  contents,
-  comments
-}: PostProps) {
+export function Post({ id, name, role, avatarUrl, publishedAt }: PostProps) {
+  const { data, isLoading } = usePostContentQuery(id);
+
   const dataHoraUtc = getDateUtcFormat(publishedAt);
 
   const publishedDateFormatted = format(
@@ -72,24 +52,25 @@ export function Post({
 
       <main>
         <section className={styles.content}>
-          {!contents ? (
-            <h1>Nenhum Post Encontrado</h1>
-          ) : (
-            contents.map((c) => {
-              if (c.type == 'paragraph') {
-                return <p key={c.id}>{c.content}</p>;
+          {isLoading && <LoadingPosts />}
+
+          {!isLoading && !data && <h1>Nenhum Post Encontrado</h1>}
+
+          {!isLoading &&
+            data?.map((content) => {
+              if (content.type == 'paragraph') {
+                return <p key={content.id}>{content.content}</p>;
               }
 
-              if (c.type == 'link') {
+              if (content.type == 'link') {
                 return (
-                  <a key={c.id} href="#">
+                  <a key={content.id} href="#">
                     {' '}
-                    {c.content}
+                    {content.content}
                   </a>
                 );
               }
-            })
-          )}
+            })}
         </section>
         <form>
           <strong>Deixe seu feedback</strong>
@@ -99,7 +80,7 @@ export function Post({
           </footer>
         </form>
       </main>
-
+      {/* 
       <section>
         {comments.map((comment) => {
           return (
@@ -112,7 +93,7 @@ export function Post({
             />
           );
         })}
-      </section>
+      </section>*/}
     </div>
   );
 }

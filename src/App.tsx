@@ -48,12 +48,11 @@ function App() {
               return (
                 <Post
                   key={post.id}
+                  id={post.id}
                   publishedAt={new Date(post.publishedAt)}
                   name={post.role}
                   role={post.role}
                   avatarUrl={post.avatarUrl}
-                  contents={post.contents}
-                  comments={post.comments}
                 />
               );
             })}
