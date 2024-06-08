@@ -5,6 +5,8 @@ import { ptBR } from 'date-fns/locale';
 import { getDateUtcFormat } from '@utils/date-utc-format';
 import { usePostContentQuery } from '@hooks/use-post-content-query';
 import { LoadingPosts } from '@components/LoaderPosts';
+import { usePostCommentQuery } from '@hooks/use-post-comment-query';
+import { PostComment } from '@components/PostComment';
 
 export type PostProps = {
   id: string;
@@ -15,7 +17,10 @@ export type PostProps = {
 };
 
 export function Post({ id, name, role, avatarUrl, publishedAt }: PostProps) {
-  const { data, isLoading } = usePostContentQuery(id);
+  const { data: contents, isLoading: isLoadingContent } =
+    usePostContentQuery(id);
+  const { data: comments, isLoading: isLoadingComment } =
+    usePostCommentQuery(id);
 
   const dataHoraUtc = getDateUtcFormat(publishedAt);
 
@@ -52,12 +57,12 @@ export function Post({ id, name, role, avatarUrl, publishedAt }: PostProps) {
 
       <main>
         <section className={styles.content}>
-          {isLoading && <LoadingPosts />}
+          {isLoadingContent && <LoadingPosts />}
 
-          {!isLoading && !data && <h1>Nenhum Post Encontrado</h1>}
+          {!isLoadingContent && !contents && <h1>Nenhum Post Encontrado</h1>}
 
-          {!isLoading &&
-            data?.map((content) => {
+          {!isLoadingContent &&
+            contents?.map((content) => {
               if (content.type == 'paragraph') {
                 return <p key={content.id}>{content.content}</p>;
               }
@@ -80,9 +85,10 @@ export function Post({ id, name, role, avatarUrl, publishedAt }: PostProps) {
           </footer>
         </form>
       </main>
-      {/* 
+
       <section>
-        {comments.map((comment) => {
+        {isLoadingComment && <LoadingPosts />}
+        {comments?.map((comment) => {
           return (
             <PostComment
               key={comment.id}
@@ -93,7 +99,7 @@ export function Post({ id, name, role, avatarUrl, publishedAt }: PostProps) {
             />
           );
         })}
-      </section>*/}
+      </section>
     </div>
   );
 }

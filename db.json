@@ -112,38 +112,6 @@
       "comment": "Gostei bastante.",
       "author": "Usuário2",
       "publishedAt": "2024-06-06T20:30:00.000Z"
-    },
-    {
-      "id": "5",
-      "post-id": "23369",
-      "avatarUrl": "https://gravatar.com/avatar/b6d2e15faa50ac077ce880803940d13c?s=400&d=robohash&r=x",
-      "comment": "Ótimo artigo!",
-      "author": "Usuário1",
-      "publishedAt": "2024-06-06T20:30:00.000Z"
-    },
-    {
-      "id": "6",
-      "post-id": "23369",
-      "avatarUrl": "https://gravatar.com/avatar/4dc61386001d6539d8795064d144ee24?s=400&d=robohash&r=x",
-      "comment": "Gostei bastante.",
-      "author": "Usuário2",
-      "publishedAt": "2024-06-06T20:30:00.000Z"
-    },
-    {
-      "id": "7",
-      "post-id": "23369",
-      "avatarUrl": "https://gravatar.com/avatar/b6d2e15faa50ac077ce880803940d13c?s=400&d=robohash&r=x",
-      "comment": "Ótimo artigo!",
-      "author": "Usuário1",
-      "publishedAt": "2024-06-06T20:30:00.000Z"
-    },
-    {
-      "id": "8",
-      "post-id": "23369",
-      "avatarUrl": "https://gravatar.com/avatar/4dc61386001d6539d8795064d144ee24?s=400&d=robohash&r=x",
-      "comment": "Gostei bastante.",
-      "author": "Usuário2",
-      "publishedAt": "2024-06-06T20:30:00.000Z"
     }
   ]
 }
