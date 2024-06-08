@@ -1,10 +1,11 @@
 import { Avatar } from '@components/Avatar';
 import styles from './styles.module.css';
+import stylesDialog from './dialog.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { ThumbsUp, Trash } from 'phosphor-react';
 import { useEffect, useState } from 'react';
-import Dialog from '@components/Dialog';
+import { Dialog } from '@components/Dialog';
 import { getDateUtcFormat } from '@utils/date-utc-format';
 import { usePostCommentMutation } from '@hooks/use-post-comment-mutation';
 
@@ -53,7 +54,22 @@ export function PostComment({
 
   return (
     <div className={styles.container}>
-      <Dialog isOpen={isOpenModal} setOpenModal={setIsOpenModal} />
+      <Dialog isOpen={isOpenModal}>
+        <form className={stylesDialog.content}>
+          <strong>Excluir Comentário?</strong>
+          <span>Você tem certeza que gostaria de excluir este comentário?</span>
+          <div className={stylesDialog.actions}>
+            <button
+              onClick={() => {
+                setIsOpenModal(false);
+              }}
+            >
+              Cancelar
+            </button>
+            <button>Sim, excluir</button>
+          </div>
+        </form>
+      </Dialog>
       <header>
         <Avatar avatarUrl={avatarUrl} isBorder={false} />
         <div className={styles.comment}>

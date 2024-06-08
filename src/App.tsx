@@ -7,6 +7,7 @@ import errorServer from './assets/error-server.jpg'; // Tell webpack this JS fil
 
 import { usePostQuery } from '@hooks/use-post-query';
 import { LoadingPosts } from '@components/LoaderPosts';
+import { JoditEditorComponent } from '@components/Editor';
 
 type Post = PostProps;
 
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className={styles.container}>
+      {/*<JoditEditorComponent />*/}
       <Header />
       <div className={styles.profileCard}>
         <ProfileCard
