@@ -4,10 +4,11 @@ import { api } from '@services/api';
 
 export interface PostData {
   id: string;
-  name: string;
+  author: string;
   role: string;
   avatarUrl: string;
   publishedAt: Date;
+  content: string;
 }
 
 const fetchData = async (): AxiosPromise<PostData[]> => {

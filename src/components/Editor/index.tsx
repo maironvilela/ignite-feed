@@ -1,33 +1,42 @@
-import React, { useState, useRef, useMemo } from 'react';
+import { useRef, useMemo } from 'react';
 import JoditEditor from 'jodit-react';
+import styles from './styles.module.css';
+interface JoditEditorComponentProps {
+  placeholder?: string;
+  content: string;
+  setContent: (content: string) => void;
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const JoditEditorComponent = ({ placeholder }: any) => {
+export const JoditEditorComponent = ({
+  placeholder,
+  content,
+  setContent
+}: JoditEditorComponentProps) => {
   const editor = useRef(null);
-  const [content, setContent] = useState('');
 
   const config = useMemo(
     () => ({
       readonly: false,
-      height: 400,
+      height: 500,
+      width: 300,
+      theme: 'dark',
+      allowResizeX: false,
+      allowResizeY: false,
+      toolbar: true,
+
       placeholder: placeholder || 'Start typings...'
     }),
     [placeholder]
   );
 
   return (
-    <>
+    <div className={styles.container}>
       <JoditEditor
         ref={editor}
         value={content}
         config={config}
         onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-        onChange={(newContent) => {
-          console.log(newContent);
-        }}
       />
-
-      {content}
-    </>
+    </div>
   );
 };

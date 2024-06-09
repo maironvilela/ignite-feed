@@ -2,37 +2,39 @@ import { api } from '@services/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosPromise } from 'axios';
 
-interface CommentData {
+interface PostData {
   id?: string;
-  comment: string;
+  author: string;
+  role: string;
+  content: string;
   avatarUrl: string;
   publishedAt: Date;
-  author: string;
 }
 
 const submit = async ({
-  comment,
+  content,
   avatarUrl,
   publishedAt,
-  author
-}: CommentData): AxiosPromise<CommentData> => {
-  const response = await api.post<CommentData>('http://localhost:3000/posts', {
-    comment,
+  author,
+  role
+}: PostData): AxiosPromise<PostData> => {
+  const response = await api.post<PostData>('http://localhost:3000/posts', {
+    content,
     avatarUrl,
     publishedAt,
-    author
+    author,
+    role
   });
   return response;
 };
 
-export function usePostCommentMutation() {
+export function usePostMutation() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: submit,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['fetch-comment-data'],
-        refetchType: 'all'
+        queryKey: ['fetch-post-data']
       });
     }
   });

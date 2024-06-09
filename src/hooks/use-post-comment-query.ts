@@ -19,15 +19,13 @@ const fetchData = async (postId: string): AxiosPromise<PostCommentsData[]> => {
 };
 
 export function usePostCommentQuery(postId: string) {
+  console.log({ postId });
+
   const query = useQuery({
     queryFn: async () => {
-      setTimeout(() => {
-        console.log('T');
-      }, 500000);
       return await fetchData(postId);
     },
-    queryKey: ['fetch-comment-data'],
-    enabled: !!postId
+    queryKey: ['fetch-comment-data']
   });
 
   const data = query.data?.data;

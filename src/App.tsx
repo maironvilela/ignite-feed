@@ -7,12 +7,15 @@ import errorServer from './assets/error-server.jpg'; // Tell webpack this JS fil
 
 import { usePostQuery } from '@hooks/use-post-query';
 import { LoadingPosts } from '@components/LoaderPosts';
-import { JoditEditorComponent } from '@components/Editor';
+import { NewPost } from '@components/NewPost';
 
 type Post = PostProps;
 
 function App() {
   const { data, isLoading, isError } = usePostQuery();
+
+  const dataReverse = data?.reverse();
+  console.log(dataReverse);
 
   const user = {
     avatarUrl:
@@ -23,41 +26,60 @@ function App() {
 
   return (
     <div className={styles.container}>
-      {/*<JoditEditorComponent />*/}
       <Header />
-      <div className={styles.profileCard}>
-        <ProfileCard
-          name={user.name}
-          avatarUrl={user.avatarUrl}
-          profession={user.role}
-        />
+      <div className={styles.content}>
+        <div className={styles.sidebar}>
+          <div>
+            <ProfileCard
+              name={user.name}
+              avatarUrl={user.avatarUrl}
+              profession={user.role}
+            />
+            {/**
+            <button
+              className={styles.new_post}
+              onClick={() => {
+                //setIsOpen(true);
+              }}
+            >
+              Novo Post
+            </button> */}
 
-        <div className={styles.post}>
-          {isLoading && <LoadingPosts />}
-          {isError && (
-            <div>
-              <img src={errorServer} alt="Logo" />
-            </div>
-          )}
-          {data?.length === 0 && (
-            <div>
-              <img src={pageNotFound} alt="Logo" />
-            </div>
-          )}
+            <>
+              <div className="editor">
+                <NewPost />
+              </div>
+            </>
+          </div>
 
-          {!isLoading &&
-            data?.map((post) => {
-              return (
-                <Post
-                  key={post.id}
-                  id={post.id}
-                  publishedAt={new Date(post.publishedAt)}
-                  name={post.role}
-                  role={post.role}
-                  avatarUrl={post.avatarUrl}
-                />
-              );
-            })}
+          <div className={styles.post}>
+            {isLoading && <LoadingPosts />}
+            {isError && (
+              <div>
+                <img src={errorServer} alt="Logo" />
+              </div>
+            )}
+            {data?.length === 0 && (
+              <div>
+                <img src={pageNotFound} alt="Logo" />
+              </div>
+            )}
+
+            {!isLoading &&
+              dataReverse?.map((post) => {
+                return (
+                  <Post
+                    key={post.id}
+                    id={post.id}
+                    publishedAt={new Date(post.publishedAt)}
+                    author={post.author}
+                    role={post.role}
+                    avatarUrl={post.avatarUrl}
+                    content={post.content}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
     </div>

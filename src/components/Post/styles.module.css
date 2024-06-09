@@ -1,7 +1,4 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
   padding: 4rem;
   background-color: var(--gray-600);
 }
@@ -70,7 +67,7 @@ form footer button:hover {
 }
 
 form textarea {
-  width: 100%;
+  display: block;
   height: 9.6rem;
   margin-top: 1.6rem;
   background-color: var(--gray-800);
@@ -79,6 +76,7 @@ form textarea {
   padding: 1.3rem 1.6rem;
   border: 0;
   line-height: 1.4;
+  width: 100%;
 }
 
 form textarea:placeholder {

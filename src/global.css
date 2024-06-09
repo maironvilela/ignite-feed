@@ -48,7 +48,6 @@ body {
   text-rendering: optimizeLegibility;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  background: '#030917';
 }
 
 body,
@@ -89,4 +88,15 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.jodit-react-container .jodit_theme_dark .jodit-wysiwyg {
+  background-color: var(--gray-600);
+}
+.jodit-react-container .jodit_theme_dark .jodit-wysiwyg p {
+  color: var(--white);
+}
+
+.jodit_theme_dark .jodit-toolbar__box {
+  background-color: var(--gray-500) !important;
 }

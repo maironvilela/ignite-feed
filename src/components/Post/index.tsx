@@ -3,7 +3,6 @@ import styles from './styles.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { getDateUtcFormat } from '@utils/date-utc-format';
-import { usePostContentQuery } from '@hooks/use-post-content-query';
 import { LoadingPosts } from '@components/LoaderPosts';
 import { usePostCommentQuery } from '@hooks/use-post-comment-query';
 import { PostComment } from '@components/PostComment';
@@ -11,14 +10,22 @@ import { PostComment } from '@components/PostComment';
 export type PostProps = {
   id: string;
   publishedAt: Date;
-  name: string;
+  author: string;
   role: string;
   avatarUrl: string;
+  content: string;
 };
 
-export function Post({ id, name, role, avatarUrl, publishedAt }: PostProps) {
-  const { data: contents, isLoading: isLoadingContent } =
-    usePostContentQuery(id);
+export function Post({
+  id,
+  author,
+  role,
+  avatarUrl,
+  publishedAt,
+  content
+}: PostProps) {
+  //const { data: contents, isLoading: isLoadingContent } =
+  //usePostContentQuery(id);
   const { data: comments, isLoading: isLoadingComment } =
     usePostCommentQuery(id);
 
@@ -36,15 +43,15 @@ export function Post({ id, name, role, avatarUrl, publishedAt }: PostProps) {
     locale: ptBR,
     addSuffix: true
   });
-  const isVerticalView = false;
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <Profile
           avatarUrl={avatarUrl}
-          name={name}
+          name={author}
           profession={role}
-          isVerticalView={isVerticalView}
+          isVerticalView={false}
         />
 
         <time
@@ -57,25 +64,10 @@ export function Post({ id, name, role, avatarUrl, publishedAt }: PostProps) {
 
       <main>
         <section className={styles.content}>
-          {isLoadingContent && <LoadingPosts />}
-
-          {!isLoadingContent && !contents && <h1>Nenhum Post Encontrado</h1>}
-
-          {!isLoadingContent &&
-            contents?.map((content) => {
-              if (content.type == 'paragraph') {
-                return <p key={content.id}>{content.content}</p>;
-              }
-
-              if (content.type == 'link') {
-                return (
-                  <a key={content.id} href="#">
-                    {' '}
-                    {content.content}
-                  </a>
-                );
-              }
-            })}
+          <div
+            className="render-html"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </section>
         <form>
           <strong>Deixe seu feedback</strong>

@@ -1,0 +1,19 @@
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+
+.actions button {
+  padding: 1.2rem;
+  border-radius: 8px;
+  background-color: var(--gray-600);
+  color: var(--white);
+  transition: all 1s;
+}
+
+.actions button:hover {
+  filter: brightness(0.8);
+  border: 1px solid var(--green-300);
+}

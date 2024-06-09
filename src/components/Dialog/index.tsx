@@ -6,5 +6,11 @@ type DialogProps = {
 };
 
 export function Dialog({ isOpen, children }: DialogProps) {
-  return isOpen ? <div className={styles.container}>{children}</div> : '';
+  return (
+    isOpen && (
+      <div className={styles.container}>
+        <main className={styles.content}>{children}</main>
+      </div>
+    )
+  );
 }
