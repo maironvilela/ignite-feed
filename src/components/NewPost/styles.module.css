@@ -13,7 +13,19 @@
   transition: all 1s;
 }
 
-.actions button:hover {
+.actions .btn_save:hover {
   filter: brightness(0.8);
   border: 1px solid var(--green-300);
+  color: var(--green-300);
+}
+
+.actions .btn_cancel:hover {
+  filter: brightness(0.8);
+  border: 1px solid rgb(223, 16, 16);
+  color: rgb(223, 16, 16);
+}
+.actions .btn_clean:hover {
+  filter: brightness(0.8);
+  border: 1px solid rgb(129, 129, 231);
+  color: rgb(129, 129, 231);
 }

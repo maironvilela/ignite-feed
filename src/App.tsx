@@ -2,24 +2,20 @@ import { Header } from '@components/Header';
 import { Post, PostProps } from '@components/Post';
 import { ProfileCard } from '@components/ProfileCard';
 import styles from './app.module.css';
-import pageNotFound from './assets/posts-not-found.svg'; // Tell webpack this JS file uses this image
-import errorServer from './assets/error-server.jpg'; // Tell webpack this JS file uses this image
+import pageNotFound from './assets/posts-not-found.svg';
+import errorServer from './assets/error-server.jpg';
 
 import { usePostQuery } from '@hooks/use-post-query';
 import { LoadingPosts } from '@components/LoaderPosts';
-import { NewPost } from '@components/NewPost';
+import { useContext, useState } from 'react';
+import { UserContext } from '@contexts/user-context';
 
 type Post = PostProps;
 
 function App() {
   const { data, isLoading, isError } = usePostQuery();
-
-  const user = {
-    avatarUrl:
-      'https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400',
-    name: 'Maria da Silva',
-    role: 'Departamento Pessoal'
-  };
+  const [isOpenModalCreatePost, setIsOpenModalCreatePost] = useState(false);
+  const { user } = useContext(UserContext);
 
   return (
     <div className={styles.container}>
@@ -32,21 +28,15 @@ function App() {
               avatarUrl={user.avatarUrl}
               profession={user.role}
             />
-            {/**
+
             <button
               className={styles.new_post}
               onClick={() => {
-                //setIsOpen(true);
+                setIsOpenModalCreatePost(true);
               }}
             >
               Novo Post
-            </button> */}
-
-            <>
-              <div className="editor">
-                <NewPost />
-              </div>
-            </>
+            </button>
           </div>
 
           <div className={styles.post}>
@@ -73,6 +63,8 @@ function App() {
                     role={post.role}
                     avatarUrl={post.avatarUrl}
                     content={post.content}
+                    isOpenModalCreatePost={isOpenModalCreatePost}
+                    setIsOpenModalCreatePost={setIsOpenModalCreatePost}
                   />
                 );
               })}

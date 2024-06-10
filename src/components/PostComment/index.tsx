@@ -4,16 +4,17 @@ import stylesDialog from './dialog.module.css';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { ThumbsUp, Trash } from 'phosphor-react';
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Dialog } from '@components/Dialog';
 import { getDateUtcFormat } from '@utils/date-utc-format';
-import { usePostCommentMutation } from '@hooks/use-post-comment-mutation';
+import { UserContext } from '@contexts/user-context';
 
 type PostComment = {
   avatarUrl: string;
   publishedAt: Date;
   author: string;
   comment: string;
+  post_id: string;
 };
 export function PostComment({
   avatarUrl,
@@ -21,19 +22,7 @@ export function PostComment({
   author,
   comment
 }: PostComment) {
-  const { mutate, isSuccess } = usePostCommentMutation();
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleSubmit = (data: PostComment) => {
-    mutate(data);
-  };
-  const handleClose = () => {
-    console.log('Fechando modal');
-  };
-
-  useEffect(() => {
-    handleClose;
-  }, [isSuccess]);
+  const { user } = useContext(UserContext);
 
   const dataHoraUtc = getDateUtcFormat(publishedAt);
 
@@ -74,7 +63,10 @@ export function PostComment({
         <Avatar avatarUrl={avatarUrl} isBorder={false} />
         <div className={styles.comment}>
           <div className={styles.author_information}>
-            <strong>{author}</strong>
+            <strong>
+              {author}
+              {author && author === user.name && ' (Voce)'}
+            </strong>
             <time
               dateTime={new Date(publishedAt).toISOString()}
               title={publishedDateFormatted}

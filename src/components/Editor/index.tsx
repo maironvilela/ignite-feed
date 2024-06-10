@@ -17,8 +17,8 @@ export const JoditEditorComponent = ({
   const config = useMemo(
     () => ({
       readonly: false,
-      height: 500,
-      width: 300,
+      height: 400,
+      width: 600,
       theme: 'dark',
       allowResizeX: false,
       allowResizeY: false,

@@ -1,25 +1,28 @@
 import { JoditEditorComponent } from '@components/Editor';
 import { usePostMutation } from '@hooks/use-post-mutation';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './styles.module.css';
+import { UserContext } from '@contexts/user-context';
 
-export function NewPost() {
+interface NewPostProps {
+  setIsOpenModalCreatePost(isOpenModalCreatePost: boolean): void;
+}
+
+export function NewPost({ setIsOpenModalCreatePost }: NewPostProps) {
+  const { user } = useContext(UserContext);
   const { mutate } = usePostMutation();
   const [content, setContent] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isOpen, setIsOpen] = useState(false);
 
   const savePost = () => {
     mutate({
-      author: 'Mairon Vilela',
+      author: user.name,
       content,
-      avatarUrl:
-        'https://robohash.org/592538b2ea1113619bd88d3f2523429a?set=set4&bgset=&size=400x400',
+      avatarUrl: user.avatarUrl,
       publishedAt: new Date(),
-      role: 'RH',
-      id: '123'
+      role: user.role
     });
-    setIsOpen(false);
+    setIsOpenModalCreatePost(false);
     setContent('');
   };
 
@@ -31,9 +34,17 @@ export function NewPost() {
         setContent={setContent}
       />
       <div className={styles.actions}>
-        <button onClick={() => savePost()}>Salvar</button>
-        <button onClick={() => setIsOpen(false)}>Cancelar</button>
+        <button className={styles.btn_save} onClick={() => savePost()}>
+          Salvar
+        </button>
         <button
+          className={styles.btn_cancel}
+          onClick={() => setIsOpenModalCreatePost(false)}
+        >
+          Cancelar
+        </button>
+        <button
+          className={styles.btn_clean}
           onClick={() => {
             setContent('');
           }}
