@@ -9,6 +9,8 @@ import { usePostQuery } from '@hooks/use-post-query';
 import { LoadingPosts } from '@components/LoaderPosts';
 import { useContext, useState } from 'react';
 import { UserContext } from '@contexts/user-context';
+import { Dialog } from '@components/Dialog';
+import { NewPost } from '@components/NewPost';
 
 type Post = PostProps;
 
@@ -71,6 +73,11 @@ function App() {
           </div>
         </div>
       </div>
+      <Dialog isOpen={isOpenModalCreatePost}>
+        <div className="editor">
+          <NewPost setIsOpenModalCreatePost={setIsOpenModalCreatePost} />
+        </div>
+      </Dialog>
     </div>
   );
 }

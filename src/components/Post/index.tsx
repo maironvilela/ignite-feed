@@ -8,8 +8,7 @@ import { usePostCommentQuery } from '@hooks/use-post-comment-query';
 import { PostComment } from '@components/PostComment';
 import { ChangeEvent, useContext, useState } from 'react';
 import { usePostCommentMutation } from '@hooks/use-post-comment-mutation';
-import { NewPost } from '@components/NewPost';
-import { Dialog } from '@components/Dialog';
+
 import { UserContext } from '@contexts/user-context';
 
 export type PostProps = {
@@ -30,7 +29,6 @@ export function Post({
   avatarUrl,
   publishedAt,
   content,
-  setIsOpenModalCreatePost,
   isOpenModalCreatePost
 }: PostProps) {
   console.log(isOpenModalCreatePost);
@@ -75,67 +73,60 @@ export function Post({
   }
 
   return (
-    <>
-      <Dialog isOpen={isOpenModalCreatePost}>
-        <div className="editor">
-          <NewPost setIsOpenModalCreatePost={setIsOpenModalCreatePost} />
-        </div>
-      </Dialog>
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <Profile
-            avatarUrl={avatarUrl}
-            name={author}
-            profession={role}
-            isVerticalView={false}
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <Profile
+          avatarUrl={avatarUrl}
+          name={author}
+          profession={role}
+          isVerticalView={false}
+        />
+
+        <time
+          title={publishedDateFormatted}
+          dateTime={new Date(publishedAt).toISOString()}
+        >
+          {publishedDateRelativeToNow}
+        </time>
+      </header>
+
+      <main>
+        <section className={styles.content}>
+          <div
+            className="render-html"
+            dangerouslySetInnerHTML={{ __html: content }}
           />
-
-          <time
-            title={publishedDateFormatted}
-            dateTime={new Date(publishedAt).toISOString()}
-          >
-            {publishedDateRelativeToNow}
-          </time>
-        </header>
-
-        <main>
-          <section className={styles.content}>
-            <div
-              className="render-html"
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
-          </section>
-          <form onSubmit={handleCreateNewComment}>
-            <strong>Deixe seu feedback</strong>
-            <textarea
-              name="comment"
-              placeholder="Deixe um comentário"
-              required
-              value={newComment}
-              onChange={handleNewCommentChange}
-            />
-            <footer>
-              <button type="submit">Publicar</button>
-            </footer>
-          </form>
-        </main>
-
-        <section>
-          {isLoadingComment && <LoadingPosts />}
-          {comments?.map((comment) => {
-            return (
-              <PostComment
-                key={comment.id}
-                publishedAt={new Date(comment.publishedAt)}
-                author={comment.author}
-                avatarUrl={comment.avatarUrl}
-                comment={comment.comment}
-                post_id={id}
-              />
-            );
-          })}
         </section>
-      </div>
-    </>
+        <form onSubmit={handleCreateNewComment}>
+          <strong>Deixe seu feedback</strong>
+          <textarea
+            name="comment"
+            placeholder="Deixe um comentário"
+            required
+            value={newComment}
+            onChange={handleNewCommentChange}
+          />
+          <footer>
+            <button type="submit">Publicar</button>
+          </footer>
+        </form>
+      </main>
+
+      <section>
+        {isLoadingComment && <LoadingPosts />}
+        {comments?.map((comment) => {
+          return (
+            <PostComment
+              key={comment.id}
+              publishedAt={new Date(comment.publishedAt)}
+              author={comment.author}
+              avatarUrl={comment.avatarUrl}
+              comment={comment.comment}
+              post_id={id}
+            />
+          );
+        })}
+      </section>
+    </div>
   );
 }
