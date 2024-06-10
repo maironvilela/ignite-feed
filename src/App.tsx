@@ -14,9 +14,6 @@ type Post = PostProps;
 function App() {
   const { data, isLoading, isError } = usePostQuery();
 
-  const dataReverse = data?.reverse();
-  console.log(dataReverse);
-
   const user = {
     avatarUrl:
       'https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400',
@@ -66,7 +63,7 @@ function App() {
             )}
 
             {!isLoading &&
-              dataReverse?.map((post) => {
+              data?.map((post) => {
                 return (
                   <Post
                     key={post.id}

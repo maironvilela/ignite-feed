@@ -8,20 +8,26 @@ interface CommentData {
   avatarUrl: string;
   publishedAt: Date;
   author: string;
+  post_id: string;
 }
 
 const submit = async ({
   comment,
   avatarUrl,
   publishedAt,
-  author
+  author,
+  post_id
 }: CommentData): AxiosPromise<CommentData> => {
-  const response = await api.post<CommentData>('http://localhost:3000/posts', {
-    comment,
-    avatarUrl,
-    publishedAt,
-    author
-  });
+  const response = await api.post<CommentData>(
+    'http://localhost:3000/comments',
+    {
+      comment,
+      avatarUrl,
+      publishedAt,
+      author,
+      post_id
+    }
+  );
   return response;
 };
 
@@ -29,10 +35,9 @@ export function usePostCommentMutation() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: submit,
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: ['fetch-comment-data'],
-        refetchType: 'all'
+        queryKey: ['comment-post-', data.data.post_id]
       });
     }
   });

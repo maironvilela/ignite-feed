@@ -12,20 +12,20 @@ export interface PostCommentsData {
 }
 
 const fetchData = async (postId: string): AxiosPromise<PostCommentsData[]> => {
-  const response = await api.get<PostCommentsData[]>(
-    `http://localhost:3000/comments?post-id=${postId}`
-  );
+  console.log('fetchData');
+  const url = `http://localhost:3000/comments?post_id=${postId}&_sort=-publishedAt`;
+  console.log(url);
+  const response = await api.get<PostCommentsData[]>(url);
   return response;
 };
 
 export function usePostCommentQuery(postId: string) {
-  console.log({ postId });
-
   const query = useQuery({
     queryFn: async () => {
-      return await fetchData(postId);
+      const data = await fetchData(postId);
+      return data;
     },
-    queryKey: ['fetch-comment-data']
+    queryKey: ['comment-post-', postId]
   });
 
   const data = query.data?.data;

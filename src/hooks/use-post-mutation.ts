@@ -34,7 +34,7 @@ export function usePostMutation() {
     mutationFn: submit,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['fetch-post-data']
+        queryKey: [`post-data`]
       });
     }
   });

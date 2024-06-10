@@ -12,7 +12,9 @@ export interface PostData {
 }
 
 const fetchData = async (): AxiosPromise<PostData[]> => {
-  const response = await api.get<PostData[]>('http://localhost:3000/posts');
+  const response = await api.get<PostData[]>(
+    'http://localhost:3000/posts?_sort=-publishedAt'
+  );
 
   return response;
 };
@@ -20,7 +22,7 @@ const fetchData = async (): AxiosPromise<PostData[]> => {
 export function usePostQuery() {
   const query = useQuery({
     queryFn: fetchData,
-    queryKey: ['fetch-post-data']
+    queryKey: ['post-data']
   });
 
   const data = query.data?.data;
