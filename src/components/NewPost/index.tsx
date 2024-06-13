@@ -1,5 +1,5 @@
 import { JoditEditorComponent } from '@components/Editor';
-import { usePostMutation } from '@hooks/use-post-mutation';
+import { usePostMutation } from '@hooks/posts/use-post-mutation';
 import { useContext, useState } from 'react';
 import styles from './styles.module.css';
 import { UserContext } from '@contexts/user-context';
@@ -12,7 +12,6 @@ export function NewPost({ setIsOpenModalCreatePost }: NewPostProps) {
   const { user } = useContext(UserContext);
   const { mutate } = usePostMutation();
   const [content, setContent] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   const savePost = () => {
     mutate({

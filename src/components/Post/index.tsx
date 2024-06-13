@@ -4,10 +4,10 @@ import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { getDateUtcFormat } from '@utils/date-utc-format';
 import { LoadingPosts } from '@components/LoaderPosts';
-import { usePostCommentQuery } from '@hooks/use-post-comment-query';
+import { usePostCommentQuery } from '@hooks/comments/use-comment-query';
 import { PostComment } from '@components/PostComment';
-import { ChangeEvent, useContext, useState } from 'react';
-import { usePostCommentMutation } from '@hooks/use-post-comment-mutation';
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
+import { usePostCommentMutation } from '@hooks/comments/use-comment-save-mutation';
 
 import { UserContext } from '@contexts/user-context';
 
@@ -28,15 +28,14 @@ export function Post({
   role,
   avatarUrl,
   publishedAt,
-  content,
-  isOpenModalCreatePost
+  content
 }: PostProps) {
-  console.log(isOpenModalCreatePost);
   const { user } = useContext(UserContext);
   const [newComment, setNewComment] = useState('');
   const { data: comments, isLoading: isLoadingComment } =
     usePostCommentQuery(id);
   const { mutate } = usePostCommentMutation();
+  const [hiddenFooter, setHiddenFooter] = useState(false);
 
   const dataHoraUtc = getDateUtcFormat(publishedAt);
 
@@ -53,11 +52,9 @@ export function Post({
     addSuffix: true
   });
 
-  const handleCreateNewComment = () => {
-    event?.preventDefault();
-
+  const handleCreateNewComment = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setNewComment('');
-
     mutate({
       author: user.name,
       avatarUrl: user.avatarUrl,
@@ -65,6 +62,8 @@ export function Post({
       publishedAt: new Date(),
       post_id: id
     });
+
+    setHiddenFooter(false);
   };
 
   function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -105,8 +104,9 @@ export function Post({
             required
             value={newComment}
             onChange={handleNewCommentChange}
+            onFocus={() => setHiddenFooter(true)}
           />
-          <footer>
+          <footer className={hiddenFooter ? styles.hiddenFooter : ''}>
             <button type="submit">Publicar</button>
           </footer>
         </form>
@@ -118,11 +118,11 @@ export function Post({
           return (
             <PostComment
               key={comment.id}
+              id={comment.id}
               publishedAt={new Date(comment.publishedAt)}
               author={comment.author}
               avatarUrl={comment.avatarUrl}
               comment={comment.comment}
-              post_id={id}
             />
           );
         })}

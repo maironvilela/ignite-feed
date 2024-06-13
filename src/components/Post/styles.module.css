@@ -38,11 +38,6 @@ form {
   gap: 1.6rem;
 }
 
-form:focus-within footer {
-  visibility: visible;
-  max-height: none;
-}
-
 form strong {
   color: var(--white-100);
 }
@@ -51,6 +46,11 @@ form footer {
   visibility: hidden;
   max-height: 0;
   margin: 0;
+}
+
+.hiddenFooter {
+  visibility: visible;
+  max-height: none;
 }
 form footer button {
   margin-top: 1.6rem;

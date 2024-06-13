@@ -12,9 +12,7 @@ export interface PostCommentsData {
 }
 
 const fetchData = async (postId: string): AxiosPromise<PostCommentsData[]> => {
-  console.log('fetchData');
   const url = `http://localhost:3000/comments?post_id=${postId}&_sort=-publishedAt`;
-  console.log(url);
   const response = await api.get<PostCommentsData[]>(url);
   return response;
 };

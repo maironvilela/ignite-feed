@@ -5,7 +5,7 @@ import styles from './app.module.css';
 import pageNotFound from './assets/posts-not-found.svg';
 import errorServer from './assets/error-server.jpg';
 
-import { usePostQuery } from '@hooks/use-post-query';
+import { usePostQuery } from '@hooks/posts/use-post-query';
 import { LoadingPosts } from '@components/LoaderPosts';
 import { useContext, useState } from 'react';
 import { UserContext } from '@contexts/user-context';

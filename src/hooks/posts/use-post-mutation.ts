@@ -32,7 +32,8 @@ export function usePostMutation() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: submit,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       queryClient.invalidateQueries({
         queryKey: [`post-data`]
       });

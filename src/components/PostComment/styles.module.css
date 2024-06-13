@@ -71,3 +71,10 @@ footer button span::before {
 footer button:hover {
   color: var(--green-300);
 }
+
+footer button.isLiked {
+  color: var(--green-300);
+}
+footer button.isLiked:hover {
+  color: var(--gray-200);
+}
