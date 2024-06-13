@@ -22,57 +22,57 @@ function App() {
   return (
     <div className={styles.container}>
       <Header />
+
       <div className={styles.content}>
         <div className={styles.sidebar}>
-          <div>
-            <ProfileCard
-              name={user.name}
-              avatarUrl={user.avatarUrl}
-              profession={user.role}
-            />
+          <ProfileCard
+            name={user.name}
+            avatarUrl={user.avatarUrl}
+            profession={user.role}
+          />
 
-            <button
-              className={styles.new_post}
-              onClick={() => {
-                setIsOpenModalCreatePost(true);
-              }}
-            >
-              Novo Post
-            </button>
-          </div>
+          <button
+            className={styles.new_post}
+            onClick={() => {
+              setIsOpenModalCreatePost(true);
+            }}
+          >
+            Novo Post
+          </button>
+        </div>
 
-          <div className={styles.post}>
-            {isLoading && <LoadingPosts />}
-            {isError && (
-              <div>
-                <img src={errorServer} alt="Logo" />
-              </div>
-            )}
-            {data?.length === 0 && (
-              <div>
-                <img src={pageNotFound} alt="Logo" />
-              </div>
-            )}
+        <div className={styles.post}>
+          {isLoading && <LoadingPosts />}
+          {isError && (
+            <div>
+              <img src={errorServer} alt="Logo" />
+            </div>
+          )}
+          {data?.length === 0 && (
+            <div>
+              <img src={pageNotFound} alt="Logo" />
+            </div>
+          )}
 
-            {!isLoading &&
-              data?.map((post) => {
-                return (
-                  <Post
-                    key={post.id}
-                    id={post.id}
-                    publishedAt={new Date(post.publishedAt)}
-                    author={post.author}
-                    role={post.role}
-                    avatarUrl={post.avatarUrl}
-                    content={post.content}
-                    isOpenModalCreatePost={isOpenModalCreatePost}
-                    setIsOpenModalCreatePost={setIsOpenModalCreatePost}
-                  />
-                );
-              })}
-          </div>
+          {!isLoading &&
+            data?.map((post) => {
+              return (
+                <Post
+                  key={post.id}
+                  id={post.id}
+                  publishedAt={new Date(post.publishedAt)}
+                  author={post.author}
+                  role={post.role}
+                  avatarUrl={post.avatarUrl}
+                  content={post.content}
+                  isOpenModalCreatePost={isOpenModalCreatePost}
+                  setIsOpenModalCreatePost={setIsOpenModalCreatePost}
+                />
+              );
+            })}
         </div>
       </div>
+
       <Dialog isOpen={isOpenModalCreatePost}>
         <div className="editor">
           <NewPost setIsOpenModalCreatePost={setIsOpenModalCreatePost} />

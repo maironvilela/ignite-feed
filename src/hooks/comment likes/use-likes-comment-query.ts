@@ -19,6 +19,7 @@ export function useLikesCommentQuery(commentId: string) {
     queryFn: async () => {
       const data = await fechData(commentId);
       return data;
+      console.log(data);
     },
     queryKey: [`likes-comment-`, commentId]
   });

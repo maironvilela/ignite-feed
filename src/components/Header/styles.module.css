@@ -7,6 +7,13 @@
   align-items: center;
   justify-content: center;
   gap: 1, 6rem;
+  position: fixed;
+  scrollbar-width: 0;
+  transition: background-color 2s;
+}
+
+.scrolled {
+  background-color: rgba(56, 54, 54, 0.6);
 }
 
 .header h1 {

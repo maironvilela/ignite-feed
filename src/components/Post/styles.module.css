@@ -1,6 +1,8 @@
 .container {
   padding: 4rem;
   background-color: var(--gray-600);
+  border-radius: 16px;
+  margin-top: 2.4rem;
 }
 
 .header {
