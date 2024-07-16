@@ -23,57 +23,16 @@
       "publishedAt": "2024-06-13T19:00:26.781Z",
       "author": "Maria da Silva Oliveira",
       "role": "Departamento Pessoal"
+    },
+    {
+      "id": "838b",
+      "content": "<p>asdasd</p>",
+      "avatarUrl": "https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400",
+      "publishedAt": "2024-07-16T16:51:51.213Z",
+      "author": "Maria da Silva Oliveira",
+      "role": "Departamento Pessoal"
     }
   ],
-  "comments": [
-    {
-      "id": "8a40",
-      "comment": "1",
-      "avatarUrl": "https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400",
-      "publishedAt": "2024-06-13T18:37:48.566Z",
-      "author": "Maria da Silva Oliveira",
-      "post_id": "2cb6"
-    },
-    {
-      "id": "b422",
-      "comment": "2",
-      "avatarUrl": "https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400",
-      "publishedAt": "2024-06-13T18:40:24.909Z",
-      "author": "Maria da Silva Oliveira",
-      "post_id": "2cb6"
-    },
-    {
-      "id": "96b9",
-      "comment": "3",
-      "avatarUrl": "https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400",
-      "publishedAt": "2024-06-13T18:40:34.371Z",
-      "author": "Maria da Silva Oliveira",
-      "post_id": "2cb6"
-    },
-    {
-      "id": "9152",
-      "comment": "1",
-      "avatarUrl": "https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400",
-      "publishedAt": "2024-06-13T18:43:11.117Z",
-      "author": "Maria da Silva Oliveira",
-      "post_id": "d7d9"
-    },
-    {
-      "id": "16c7",
-      "comment": "2",
-      "avatarUrl": "https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400",
-      "publishedAt": "2024-06-13T18:43:13.046Z",
-      "author": "Maria da Silva Oliveira",
-      "post_id": "d7d9"
-    },
-    {
-      "id": "a054",
-      "comment": "asas",
-      "avatarUrl": "https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400",
-      "publishedAt": "2024-06-13T18:59:47.404Z",
-      "author": "Maria da Silva Oliveira",
-      "post_id": "2cb6"
-    }
-  ],
+  "comments": [],
   "likes_comments": []
 }
