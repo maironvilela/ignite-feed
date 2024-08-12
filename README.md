@@ -1,6 +1,7 @@
 <h1 align="center">
      Ignite Feed
  </h1>
+
 ## 📒 Sobre o Projeto
 
 O Ignite Feed é uma plataforma online que permite aos usuários criar feeds de notícias e comentá-los
