@@ -4,6 +4,10 @@
   border-radius: 16px;
 }
 
+.container + .container {
+  margin-top: 3rem;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
