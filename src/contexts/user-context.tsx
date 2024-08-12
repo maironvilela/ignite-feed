@@ -17,8 +17,7 @@ const UserContext = createContext<UserContextProps>({} as UserContextProps);
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User>({
     id: '2345678',
-    avatarUrl:
-      'https://robohash.org/fa702cd215a504d5069edbc7f623979f?set=set4&bgset=&size=400x400',
+    avatarUrl: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/662.jpg',
     name: 'Maria da Silva Oliveira',
     role: 'Departamento Pessoal'
   });
