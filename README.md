@@ -1,9 +1,6 @@
 <h1 align="center">
      Ignite Feed
  </h1>
-
-[![Template do projeto challenge-decodificador-texto ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/clzr5x8231hrp07lwe3hbdjvg)](https://maironvilela.github.io/challenge-decodificador-texto/)
-
 ## 📒 Sobre o Projeto
 
 O Ignite Feed é uma plataforma online que permite aos usuários criar feeds de notícias e comentá-los
