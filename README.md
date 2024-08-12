@@ -20,6 +20,15 @@ O Ignite Feed é uma plataforma online que permite aos usuários criar feeds de 
 [![](https://img.shields.io/badge/Lint_Staged-052051)]()
 [![](https://img.shields.io/badge/Commitizen-052051)]()
 
+## 🏅 Principais Recursos
+
+[![](https://img.shields.io/badge/CSS_Modules-FFFFFF)]()
+[![](https://img.shields.io/badge/Context_API-FFFFFF)]()
+[![](https://img.shields.io/badge/**-FFFFFF)]()
+[![](https://img.shields.io/badge/**-FFFFFF)]()
+[![](https://img.shields.io/badge/**-FFFFFF)]()
+[![](https://img.shields.io/badge/**-FFFFFF)]()
+
 ## 🚀 Executando o projeto
 
 **Passo 01:** Faça um clone do projeto
